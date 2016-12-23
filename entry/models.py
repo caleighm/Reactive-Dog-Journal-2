@@ -15,15 +15,19 @@ class Entry(models.Model):
 		self.Last_modified = timezone.now()
 		self.save()
 
+	def __str__(self):
+		return str(self.Reactions_to_dogs + self.Reactions_to_people 
+			+ self.Other_reactions)
+
 	# Access entry details
-	def __notes__(self):
+	def notes(self):
 		return self.Notes
 	
-	def __numDogReactions__(self):
+	def numDogReactions(self):
 		return self.Reactions_to_dogs
 
-	def __numPplReactions__(self):
+	def numPplReactions(self):
 		return self.Reactions_to_people
 
-	def __numOthReactions__(self):
+	def numOthReactions(self):
 		return self.Other_reactions

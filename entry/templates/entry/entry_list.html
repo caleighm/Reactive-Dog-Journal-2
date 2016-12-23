@@ -3,9 +3,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Reactive Dog Journal 2.0</title>
 </head>
 <body>
+    <div>
+        <h1><a href="/">Reactive Dog Journal 2.0</a></h1>
+    </div>
 
+    {% for entry in entries %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
 </body>
 </html>
