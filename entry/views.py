@@ -1,4 +1,5 @@
 from django.shortcuts import render
-from datetime import datetime
+from datetime import date
 
-# Create your views here.
+def entry_list(request):
+	return render(request, 'entry/entry_list.html', {})
