@@ -8,23 +8,27 @@
     <title>Reactive Dog Journal 2.0</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="https://use.fontawesome.com/5df6036a1c.js"></script>
     <link rel="stylesheet" href="{% static 'css/entry.css' %}">
 </head>
 <body>
     <div class="page-header">
-        {% if user.is_authenticated %}
-			<a href="{% url 'entry_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-		{% endif %}
         <h1><a href="/">Reactive Dog Journal 2.0</a></h1>
-		<p>Track your dog's progress. Developed by <a href="http://www.caleighm.com">Caleigh Minshall</a>.</p>
+        <p>Track your dog's progress. You and Doggo will prevail!</p>
+        {% if user.is_authenticated %}
+			<a href="{% url 'entry_new' %}" class="top-menu"><span class="fa fa-plus" title="New entry"></span></a>
+        {% endif %}
+			<a href="/" class="top-menu"><span class="fa fa-area-chart" title="Report"></span></a>
+			<a href="https://www.github.com/caleighm" class="top-menu"><span class="fa fa-github" title="GitHub"></span></a>
     </div>
     <div class="content container">
         <div class="row">
-            <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-            </div>
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
+	<div class="page-footer">
+		<p>Developed by <a href="http://www.caleighm.com">Caleigh Minshall</a> in December 2016.</p>
+	</div>
 </body>
 </html>

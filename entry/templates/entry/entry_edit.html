@@ -1,10 +1,12 @@
 ﻿{% extends 'entry/base.html' %}
 
 {% block content %}
-<h1>Add or change an entry</h1>
-<form method="POST" class="edit-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
+    <div class="col-md-8">
+        <h1>Add or change an entry</h1>
+        <form method="POST" class="edit-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
 {% endblock %}

@@ -2,14 +2,16 @@
 
 {% block content %}
     {% for entry in entries %}
-    <div class="entry">
-        <h1><a href="{% url 'entry_detail' pk=entry.pk %}">{{ entry.Date }}</a></h1>
-        <h2>Total reactions: {{ entry }}</h2>
-        <p>Reactions to dogs: {{ entry.Reactions_to_dogs }}</p>
-        <p>Reactions to people: {{ entry.Reactions_to_people }}</p>
-        <p>Other reactions: {{ entry.Other_reactions }}</p>
-        <h2>Notes:</h2>
-        <p>{{ entry.Notes|linebreaksbr }}</p>
+    <div class="col-md-3">
+        <div class="entry-small">
+            <h1><a href="{% url 'entry_detail' pk=entry.pk %}">{{ entry.Date }}</a></h1>
+            <h2>Total reactions: {{ entry }}</h2>
+            <p>Reactions to dogs: {{ entry.Reactions_to_dogs }}</p>
+            <p>Reactions to people: {{ entry.Reactions_to_people }}</p>
+            <p>Other reactions: {{ entry.Other_reactions }}</p>
+            <h2>Notes:</h2>
+            <p>{{ entry.Notes|truncatewords:20 }}</p>
+        </div>
     </div>
     {% endfor %}
 {% endblock %}

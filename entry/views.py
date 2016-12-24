@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import date
+from django.utils import timezone
 from .models import Entry
 from .forms import EntryForm
 
@@ -37,3 +38,8 @@ def entry_edit(request, pk):
 	else:
 		form = EntryForm(instance=entry)
 	return render(request, 'entry/entry_edit.html', {'form': form})
+
+def entry_remove(request, pk):
+	entry = get_object_or_404(Entry, pk=pk)
+	entry.delete()
+	return redirect('entry_list')
