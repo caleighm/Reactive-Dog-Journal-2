@@ -1,6 +1,11 @@
 # Reactive-Dog-Journal-2
 Reactive Dog Journal 2.0 as a web application using Django framework. (in progress)
 
+## to-do:
+- layout of bootstrap: do thumbnails that maybe generate as you scroll? that would be sweet.
+- generate report
+- other users can create accts?
+
 # What is a Reactive Dog Journal, anyway?
 You've seen it before: some poor sucker hanging on for dear life to the end of a leash while her dog barks and snarls and lunges at some innocent bystander/puppy/weirdly-shaped bush (oh, is that just my dog?). Sometimes this behaviour is the fault of bad training early on, other times it's poor or absent socialization from the dog's puppyhood, and other times it's just genetics. Whatever it is, it's embarrassing and overwhelming.
 
