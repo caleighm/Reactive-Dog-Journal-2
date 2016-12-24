@@ -23,11 +23,16 @@ class Entry(models.Model):
 	def notes(self):
 		return self.Notes
 	
-	def numDogReactions(self):
-		return self.Reactions_to_dogs
+	def get_data():
+		data = {'date': [], 'total': [], 'dogs': [], 'ppl': [], 'oth':[]}
 
-	def numPplReactions(self):
-		return self.Reactions_to_people
+		entries = Entry.objects.all()
 
-	def numOthReactions(self):
-		return self.Other_reactions
+		for entry in entries:
+			data['date'].append(entry.Date)
+			data['total'].append(int(entry))
+			data['dogs'].append(entry.Reactions_to_dogs)
+			data['ppl'].append(entry.Reactions_to_people)
+			data['oth'].append(entry.Other_reactions)
+
+		return data

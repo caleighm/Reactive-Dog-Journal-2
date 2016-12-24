@@ -43,3 +43,29 @@ def entry_remove(request, pk):
 	entry = get_object_or_404(Entry, pk=pk)
 	entry.delete()
 	return redirect('entry_list')
+
+def entry_report(request):
+	entries = Entry.objects.filter(Date__lte=date.today()).order_by('Date')
+	data = []
+	for entry in entries:
+		data.append(entry.get_data())
+
+
+	return render(request, 'entry/entry_detail.html', {'entry': entry})
+
+def plot(request, chartID = 'chart_ID', chart_type = 'line', chart_height = 500):
+    data = ChartData.check_valve_data()
+
+    chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}  
+    title = {"text": 'Check Valve Data'}
+    xAxis = {"title": {"text": 'Serial Number'}, "categories": data['serial numbers']}
+    yAxis = {"title": {"text": 'Data'}}
+    series = [
+        {"name": 'Mass (kg)', "data": data['mass']}, 
+        {"name": 'Pressure Drop (psid)', "data": data['pressure drop']},
+        {"name": 'Cracking Pressure (psid)', "data": data['cracking pressure']}
+        ]
+
+    return render(request, 'unit/data_plot.html', {'chartID': chartID, 'chart': chart,
+                                                    'series': series, 'title': title, 
+                                                    'xAxis': xAxis, 'yAxis': yAxis})
