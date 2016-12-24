@@ -2,7 +2,7 @@
 Reactive Dog Journal 2.0 as a web application using Django framework. (in progress)
 
 ## to-do:
-- layout of bootstrap: do thumbnails that maybe generate as you scroll? that would be sweet.
+- bootstrap layout: responsive entries laid out 3 horizontally?
 - generate report
 - other users can create accts?
 
