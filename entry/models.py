@@ -19,20 +19,19 @@ class Entry(models.Model):
 		return str(self.Reactions_to_dogs + self.Reactions_to_people 
 			+ self.Other_reactions)
 
-	# Access entry details
-	def notes(self):
-		return self.Notes
-	
-	def get_data():
+	def get_total(self):
+		return self.Reactions_to_dogs + self.Reactions_to_people + self.Other_reactions
+
+	def get_data(self):
 		data = {'date': [], 'total': [], 'dogs': [], 'ppl': [], 'oth':[]}
 
 		entries = Entry.objects.all()
 
 		for entry in entries:
-			data['date'].append(entry.Date)
-			data['total'].append(int(entry))
-			data['dogs'].append(entry.Reactions_to_dogs)
-			data['ppl'].append(entry.Reactions_to_people)
-			data['oth'].append(entry.Other_reactions)
+			data['date'] = entry.Date
+			data['total'] = entry.get_total()
+			data['dogs'] = entry.Reactions_to_dogs
+			data['ppl'] = entry.Reactions_to_people
+			data['oth'] = entry.Other_reactions
 
 		return data
