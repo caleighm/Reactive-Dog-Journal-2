@@ -46,14 +46,9 @@ def entry_remove(request, pk):
 	return redirect('entry_list')
 
 def entry_report(request, chartID = 'chart_ID', chart_type = 'line', chart_height = 500):
-	entries = Entry.objects.filter(Date__lte=date.today()).order_by('Date')
-	all_data = []
+	data = Entry.allData()
 
-	for entry in entries:
-		data = entry.get_data()
-		all_data.append(data)
-
-	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}  
+	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height}  
 	title = {"text": 'Reaction History'}
 	xAxis = {"title": {"text": "Date"}, type: 'datetime'}
 	yAxis = {"title": {"text": "Reactions"}}
