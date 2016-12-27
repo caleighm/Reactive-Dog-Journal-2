@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from datetime import date
+from datetime import date, datetime
+import calendar
 
 class Entry(models.Model):
 	author = models.ForeignKey('auth.User')
@@ -22,21 +23,19 @@ class Entry(models.Model):
 	def getTotal(self):
 		return self.Reactions_to_dogs + self.Reactions_to_people + self.Other_reactions
 
+	def localToUTC(self):
+		midnight = datetime.combine(self.Date, datetime.min.time())
+		return calendar.timegm(midnight.utctimetuple()) * 1000.0 + midnight.microsecond
+
 	def allData():
-		entries = Entry.objects.all()
-		data = {'date': [], 'total': [], 'dogs': [], 'ppl': [], 'oth':[]}
+		entries = Entry.objects.filter(Date__lte=date.today()).order_by('Date')
+		data = {'date': [], 'total': [], 'dogs': [], 'ppl': [], 'oth': []}
 
 		for entry in entries:
-			data['date'].append(entry.Date)
-			data['total'].append(entry.getTotal())
-			data['dogs'].append(entry.Reactions_to_dogs)
-			data['ppl'].append(entry.Reactions_to_people)
-			data['oth'].append(entry.Other_reactions)
-
-		'''data['date'] = entry.Date
-		data['total'] = entry.getTotal()
-		data['dogs'] = entry.Reactions_to_dogs
-		data['ppl'] = entry.Reactions_to_people
-		data['oth'] = entry.Other_reactions'''
+			UTCtime = entry.localToUTC()
+			data['total'].append([UTCtime, entry.getTotal()])
+			data['dogs'].append([UTCtime, entry.Reactions_to_dogs])
+			data['ppl'].append([UTCtime, entry.Reactions_to_people])
+			data['oth'].append([UTCtime, entry.Other_reactions])
 
 		return data

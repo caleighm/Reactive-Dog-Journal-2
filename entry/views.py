@@ -28,6 +28,7 @@ def entry_new(request):
 
 def entry_edit(request, pk):
 	entry = get_object_or_404(Entry, pk=pk)
+
 	if request.method == "POST":
 		form = EntryForm(request.POST, instance=entry)
 		if form.is_valid():
@@ -38,6 +39,7 @@ def entry_edit(request, pk):
 			return redirect('entry_detail', pk=entry.pk)
 	else:
 		form = EntryForm(instance=entry)
+
 	return render(request, 'entry/entry_edit.html', {'form': form})
 
 def entry_remove(request, pk):
@@ -45,13 +47,13 @@ def entry_remove(request, pk):
 	entry.delete()
 	return redirect('entry_list')
 
-def entry_report(request, chartID = 'chart_ID', chart_type = 'line', chart_height = 500):
+def entry_report(request, chartID = 'chartID', chart_type = 'line', chart_height = 500):
 	data = Entry.allData()
 
 	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height}  
 	title = {"text": 'Reaction History'}
-	xAxis = {"title": {"text": "Date"}, type: 'datetime'}
-	yAxis = {"title": {"text": "Reactions"}}
+	xAxis = {"title": {"text": 'Date'}, "type": 'datetime',"dateTimeLabelFormats": {"month": '%e. %b', "year": '%b'}}
+	yAxis = {"title": {"text": 'Reactions'}}
 	series = [
 		{"name": 'Total Reactions', "data": data['total']}, 
 		{"name": 'Reactions to Dogs', "data": data['dogs']},
