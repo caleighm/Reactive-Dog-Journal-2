@@ -3,9 +3,6 @@ Reactive Dog Journal 2.0 as a web application using Django framework. (in progre
 
 ## to-do:
 - create/delete/manage accounts
-- subtitle to Highcharts
-- add entry notes to tooltip in Highcharts
-- resources/page for reactive dogs
 - how to deploy/create actual database?
 - how to upload image of dog?
 
