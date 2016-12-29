@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.http import JsonResponse
 from datetime import date
@@ -13,6 +14,7 @@ def entry_detail(request, pk):
 	entry = get_object_or_404(Entry, pk=pk)
 	return render(request, 'entry/entry_detail.html', {'entry': entry})
 
+@login_required
 def entry_new(request):
 	if request.method == "POST":
 		form = EntryForm(request.POST)
@@ -26,6 +28,7 @@ def entry_new(request):
 		form = EntryForm()
 	return render(request, 'entry/entry_edit.html', {'form': form})
 
+@login_required
 def entry_edit(request, pk):
 	entry = get_object_or_404(Entry, pk=pk)
 
@@ -42,6 +45,7 @@ def entry_edit(request, pk):
 
 	return render(request, 'entry/entry_edit.html', {'form': form})
 
+@login_required
 def entry_remove(request, pk):
 	entry = get_object_or_404(Entry, pk=pk)
 	entry.delete()

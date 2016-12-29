@@ -5,8 +5,10 @@
         <div class="entry">
             <h1><a href="{% url 'entry_detail' pk=entry.pk %}">{{ entry.Date }}</a></h1>
             {% if user.is_authenticated %}
-            <a class="btn btn-default" href="{% url 'entry_edit' pk=entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-default" href="{% url 'entry_remove' pk=entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" href="{% url 'entry_edit' pk=entry.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'entry_remove' pk=entry.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% else %}
+                <a href="{%url 'login' %}" class="top-menu"><span class="fa fa-sign-in"></span></a>
             {% endif %}
             <h2>Total reactions: {{ entry }}</h2>
             <p>Reactions to dogs: {{ entry.Reactions_to_dogs }}</p>
