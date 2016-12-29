@@ -29,8 +29,19 @@
             title: title,
             xAxis: xAxis,
             yAxis: yAxis,
-            series: series
-        });
-    });
+            series: series,
+            tooltip: {
+                formatter: function () {
+                    var s = '<b>' + 'Notes for ' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b>';
+
+                    $.each(this.points, function () {
+                        s += '<br/>' + this.point.notes;
+                    });
+
+                    return s;
+                },
+                shared: true
+            }
+        })});
 </script>
 {% endblock %}

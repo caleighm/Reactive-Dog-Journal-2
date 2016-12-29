@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 from datetime import date, datetime
 import calendar
@@ -29,13 +30,13 @@ class Entry(models.Model):
 
 	def allData():
 		entries = Entry.objects.filter(Date__lte=date.today()).order_by('Date')
-		data = {'date': [], 'total': [], 'dogs': [], 'ppl': [], 'oth': []}
+		data = {'total': [], 'dogs': [], 'ppl': [], 'oth': []}
 
 		for entry in entries:
 			UTCtime = entry.localToUTC()
-			data['total'].append([UTCtime, entry.getTotal()])
-			data['dogs'].append([UTCtime, entry.Reactions_to_dogs])
-			data['ppl'].append([UTCtime, entry.Reactions_to_people])
-			data['oth'].append([UTCtime, entry.Other_reactions])
+			data['total'].append({'x':UTCtime, 'y':entry.getTotal(), 'notes':entry.Notes[:50] + "..."})
+			data['dogs'].append({'x':UTCtime, 'y':entry.Reactions_to_dogs, 'notes':""})
+			data['ppl'].append({'x':UTCtime, 'y':entry.Reactions_to_people, 'notes':""})
+			data['oth'].append({'x':UTCtime, 'y':entry.Other_reactions, 'notes':""})
 
 		return data
