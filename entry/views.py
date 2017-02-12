@@ -7,7 +7,7 @@ from .models import Entry
 from .forms import EntryForm
 
 def entry_list(request):
-	entries = Entry.objects.filter(Date__lte=date.today()).order_by('Date')
+	entries = Entry.objects.filter(Date__lte=date.today()).order_by('-Date')
 	return render(request, 'entry/entry_list.html', {'entries': entries})
 
 def entry_detail(request, pk):
