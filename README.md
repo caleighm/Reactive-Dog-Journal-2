@@ -1,9 +1,10 @@
 # Reactive-Dog-Journal-2
 Reactive Dog Journal 2.0 as a web application using Django framework. (in progress)
 
+You can find a live version here: http://reactivedog.herokuapp.com
+
 ## to-do:
 - create/delete/manage accounts
-- how to deploy/create actual database?
 - how to upload image of dog?
 
 # What is a Reactive Dog Journal, anyway?
